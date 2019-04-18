@@ -21,6 +21,7 @@ class ActionViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Scripts", style: .plain, target: self, action: #selector(chooseScript))
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -70,5 +71,23 @@ class ActionViewController: UIViewController {
         
         let selectedRange = script.selectedRange
         script.scrollRangeToVisible(selectedRange)
+    }
+    
+    @objc func chooseScript() {
+        let scriptAC = UIAlertController(title: "Choose a script", message: nil, preferredStyle: .alert)
+        scriptAC.addAction(UIAlertAction(title: "Document Title", style: .default, handler: { (action) in
+            self.script.text = "alert(document.title);"
+        }))
+        scriptAC.addAction(UIAlertAction(title: "Page Links", style: .default, handler: { (action) in
+            self.script.text = """
+            var links = document.getElementsByTagName("a");
+            alert("There are " + links.length + " links on this page.");
+            """
+        }))
+        scriptAC.addAction(UIAlertAction(title: "Forza Juve", style: .default, handler: { (action) in
+            self.script.text = #"alert("Forza Juve!");"#
+        }))
+        
+        present(scriptAC, animated: true, completion: nil)
     }
 }
