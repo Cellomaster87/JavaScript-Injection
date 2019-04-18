@@ -71,5 +71,4 @@ class ActionViewController: UIViewController {
         let selectedRange = script.selectedRange
         script.scrollRangeToVisible(selectedRange)
     }
-
 }
