@@ -75,17 +75,17 @@ class ActionViewController: UIViewController {
     
     @objc func chooseScript() {
         let scriptAC = UIAlertController(title: "Choose a script", message: nil, preferredStyle: .alert)
-        scriptAC.addAction(UIAlertAction(title: "Document Title", style: .default, handler: { (action) in
-            self.script.text = "alert(document.title);"
+        scriptAC.addAction(UIAlertAction(title: "Document Title", style: .default, handler: { [weak self] (action) in
+            self?.script.text = "alert(document.title);"
         }))
-        scriptAC.addAction(UIAlertAction(title: "Page Links", style: .default, handler: { (action) in
-            self.script.text = """
+        scriptAC.addAction(UIAlertAction(title: "Page Links", style: .default, handler: { [weak self] (action) in
+            self?.script.text = """
             var links = document.getElementsByTagName("a");
             alert("There are " + links.length + " links on this page.");
             """
         }))
-        scriptAC.addAction(UIAlertAction(title: "Forza Juve", style: .default, handler: { (action) in
-            self.script.text = #"alert("Forza Juve!");"#
+        scriptAC.addAction(UIAlertAction(title: "Forza Juve", style: .default, handler: { [weak self] (action) in
+            self?.script.text = #"alert("Forza Juve!");"#
         }))
         
         present(scriptAC, animated: true, completion: nil)
